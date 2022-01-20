@@ -1,15 +1,8 @@
 import React from 'react';
+import { Button } from '@mui/material';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Theme Application.
-        </p>
-      </header>
-    </div>
-  );
+  return <Button variant="contained">Contained</Button>;
 }
 
 export default App;
