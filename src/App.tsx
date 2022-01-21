@@ -1,7 +1,14 @@
-import { Button } from '@mui/material';
+import { CssBaseline } from '@mui/material';
+
+import Routes from './routes';
 
 function App() {
-  return <Button variant="contained">Contained</Button>;
+  return (
+    <>
+      <CssBaseline />
+      <Routes />
+    </>
+  );
 }
 
 export default App;
