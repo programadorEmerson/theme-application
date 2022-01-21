@@ -35,12 +35,22 @@
     "@typeScript-eslint/explicit-module-boundary-types": "off",
     "import-helpers/order-imports": [
       "warn",
-      { // example configuration
+      {
         "newlinesBetween": "always",
         "groups": [
+          "/react$/",
+          "/^next/",
           "/^react/",
-          "module",
-          "/^@shared/",
+          "/^@mui/",
+          "/^shared/",
+          "/^services/",
+          "/^context/",
+          "/^hooks/",
+          "/^components/",
+          "/^styles/",
+          "/^utils/",
+          "/^types/",
+          "/^public/",
           [
             "parent",
             "sibling",

@@ -1,19 +1,21 @@
-import React from 'react';
+import { StrictMode } from 'react';
+
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
 import { ThemeProvider } from '@mui/material';
 
+import theme from 'styles/theme';
+
 import App from './App';
-import theme from './styles/theme';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </ThemeProvider>
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById('root')
 );
