@@ -5,6 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { ThemeProvider } from '@mui/material';
 
+import { ThemeSelectorProvider } from 'context/theme-selector';
+
 import theme from 'styles/theme';
 
 import App from './App';
@@ -12,9 +14,11 @@ import App from './App';
 ReactDOM.render(
   <StrictMode>
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ThemeSelectorProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeSelectorProvider>
     </ThemeProvider>
   </StrictMode>,
   document.getElementById('root')
