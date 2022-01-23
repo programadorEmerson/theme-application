@@ -1,6 +1,6 @@
 import { useThemeContext } from 'hooks/theme-selector';
 
-import { Layout } from 'components';
+import { Layout } from 'components/Layout';
 
 function MainPage() {
   const { theme_context } = useThemeContext();

@@ -18,17 +18,22 @@ import ListItemText from '@mui/material/ListItemText';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 
+import { CustomHeaderTitle } from 'components/CustomHeaderTitle';
+
 import {
   CustomContainnerChildren,
   CustomSpanMenu,
   CustomPaper,
   CustomIconButton,
+  CustomContentPage,
 } from 'styles/layout';
 
 import { itemsMenu } from 'routes/menu';
 
 type LayoutProps = {
   title: string;
+  showNewButton?: boolean;
+  textNewButton?: string;
 };
 
 const drawerWidth = 240;
@@ -101,7 +106,12 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export const Layout: React.FC<LayoutProps> = ({ title, children }) => {
+export const Layout: React.FC<LayoutProps> = ({
+  title,
+  children,
+  showNewButton = false,
+  textNewButton = '',
+}) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -190,7 +200,14 @@ export const Layout: React.FC<LayoutProps> = ({ title, children }) => {
         </List>
       </Drawer>
       <CustomContainnerChildren>
-        <CustomPaper>{children}</CustomPaper>
+        <CustomPaper>
+          <CustomHeaderTitle
+            title={title}
+            showNewButton={showNewButton}
+            textButton={textNewButton}
+          />
+          <CustomContentPage>{children}</CustomContentPage>
+        </CustomPaper>
       </CustomContainnerChildren>
     </Box>
   );

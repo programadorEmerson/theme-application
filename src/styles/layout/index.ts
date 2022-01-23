@@ -44,3 +44,11 @@ export const CustomIconButton = styled(IconButton)`
     color: ${({ theme }) => theme.palette.common.white};
   }
 `;
+
+export const CustomContentPage = styled('div')`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem;
+`;

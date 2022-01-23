@@ -1,4 +1,4 @@
-import { FaBars } from 'react-icons/fa';
+import { FaLayerGroup, FaRegEye } from 'react-icons/fa';
 
 import { CustomContainnerIcon } from 'styles/routes/menu';
 
@@ -6,7 +6,7 @@ export const itemsMenu = [
   {
     icone: (
       <CustomContainnerIcon>
-        <FaBars width="1.7rem" />
+        <FaLayerGroup style={{ fontSize: '1.3rem' }} />
       </CustomContainnerIcon>
     ),
     text: 'Selecionar Tema',
@@ -15,7 +15,7 @@ export const itemsMenu = [
   {
     icone: (
       <CustomContainnerIcon>
-        <FaBars width="1.7rem" />
+        <FaRegEye style={{ fontSize: '1.3rem' }} />
       </CustomContainnerIcon>
     ),
     text: 'Visualizar Tema',
