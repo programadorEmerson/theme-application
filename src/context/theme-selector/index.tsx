@@ -14,8 +14,6 @@ import {
   ThemeProps,
 } from 'types/theme_selector.context';
 
-// import { company } from 'faker';
-
 type ThemeSelectorProps = {
   children: ReactNode;
 };
@@ -105,11 +103,7 @@ const ThemeSelectorProvider = ({ children }: ThemeSelectorProps) => {
 
   const updateTheme = async (id: number, theme: ThemeProps) => {
     try {
-      const { data }: { data: ThemeProps } = await api.patch(
-        `/themes/${id}`,
-        theme
-      );
-      console.log(data);
+      await api.patch(`/themes/${id}`, theme);
     } catch (error) {
       return null;
     }
@@ -117,11 +111,7 @@ const ThemeSelectorProvider = ({ children }: ThemeSelectorProps) => {
 
   const postTheme = async (id: number, theme: ThemeProps) => {
     try {
-      const { data }: { data: ThemeProps[] } = await api.post(
-        `/themes/`,
-        theme
-      );
-      console.log('Tema postado: ', data);
+      await api.post(`/themes/`, theme);
     } catch (error) {
       return null;
     }
@@ -168,27 +158,6 @@ const ThemeSelectorProvider = ({ children }: ThemeSelectorProps) => {
         .padStart(6, '0')
     );
   };
-
-  // Gerador de mock de temas
-  // const theme_array_generator = useCallback(
-  //   (quantity: number): ThemeProps[] => {
-  //     let id = 0;
-  //     return Array.from({ length: quantity }, () => {
-  //       const theme = {
-  //         id,
-  //         name: company.companyName(),
-  //         'background-color': generate_color_hex(),
-  //         'primary-text-color': generate_color_hex(),
-  //         'secondary-text-color': generate_color_hex(),
-  //         'accent-color': generate_color_hex(),
-  //         selected: false,
-  //       };
-  //       id += 1;
-  //       return theme;
-  //     });
-  //   },
-  //   []
-  // );
 
   // Insere novos temas no projeto
   const handleSetThemeContext = (color: ThemeProps) => {

@@ -6,8 +6,26 @@
       "background-color": "#fdfdfd",
       "primary-text-color": "#a7a9aa",
       "secondary-text-color": "#464443",
-      "accent-color": "#5ecbf5",
+      "accent-color": "#31e2f0",
       "selected": false
+    },
+    {
+      "id": 1,
+      "name": "Novo Tema",
+      "background-color": "#1919e6",
+      "primary-text-color": "#87878b",
+      "secondary-text-color": "#f12804",
+      "accent-color": "#8fb68f",
+      "selected": false
+    },
+    {
+      "id": 2,
+      "name": "Teste 1",
+      "background-color": "#be18e5",
+      "primary-text-color": "#c8e20e",
+      "secondary-text-color": "#69b888",
+      "accent-color": "#911fbc",
+      "selected": true
     }
   ]
 }

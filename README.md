@@ -1,3 +1,6 @@
+**Assista o video do projeto**:<br>
+https://drive.google.com/file/d/1SAeeDEBJLYfoCxQ-aWEVTbbmrfzKy3yu/view?usp=sharing
+
 ## Principais Frameworks/Bibliotecas utilizadas:
 
 **React Js**:<br>
@@ -9,6 +12,9 @@ Material Ui é um sistema de design apoiado em código-fonte aberto que auxilia 
 
 **EsLint**:<br>
 O ESLint é uma ferramenta que analisa o código e aponta quaisquer problemas que encontrar. Ele pode encontrar bugs, áreas potencialmente problemáticas, estilos de codificação ruins e questões de estilo. <a href="https://mui.com/" target="_blank">veja mais na documentação. </a>
+
+**Json-Server**:<br>
+Json-Server é uma poderosa ferramenta para desenvolvedores possibilitando criar "Fakes Api" para testes em projetos. <a href="https://www.npmjs.com/package/json-server/" target="_blank">veja mais na documentação. </a>
 
 **EsLint import-helpers**:<br>
 O Plugin ESLint import-helpers é utilizado para ajudar a impor uma ordem configurável para instruções de importação de bibliotecas e componentes. <a href="https://github.com/Tibfib/eslint-plugin-import-helpers/" target="_blank">veja mais na documentação. </a>
