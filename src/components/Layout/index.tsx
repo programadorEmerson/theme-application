@@ -18,6 +18,8 @@ import ListItemText from '@mui/material/ListItemText';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 
+import { useThemeContext } from 'hooks/theme-selector';
+
 import { CustomHeaderTitle } from 'components/CustomHeaderTitle';
 
 import {
@@ -28,7 +30,9 @@ import {
   CustomContentPage,
 } from 'styles/layout';
 
-import { itemsMenu } from 'routes/menu';
+import { ThemeProps } from 'types/theme_selector.context';
+
+import { itemsMenu, ItensMenuProps } from 'routes/menu';
 
 type LayoutProps = {
   title: string;
@@ -112,6 +116,15 @@ export const Layout: React.FC<LayoutProps> = ({
   showNewButton = false,
   textNewButton = '',
 }) => {
+  const [userTheme, setUserTheme] = useState<ThemeProps | null>();
+  const { theme_context } = useThemeContext();
+  useEffect(() => {
+    const themeLocalStorage = localStorage.getItem('theme.app.selected');
+    if (themeLocalStorage) {
+      const themeSelected = JSON.parse(themeLocalStorage);
+      setUserTheme(themeSelected);
+    }
+  }, [theme_context]);
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -139,76 +152,104 @@ export const Layout: React.FC<LayoutProps> = ({
   }));
 
   return (
-    <Box sx={{ display: 'flex', position: 'relative' }}>
-      <AppBar open={open}>
-        <Toolbar>
-          <CustomIconButton onClick={handleDrawerOpen} edge="start">
-            {!open && (
-              <>
-                <FaBars />
-                <span style={{ marginLeft: '2rem' }}>Theme Application</span>
-              </>
-            )}
-          </CustomIconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <CustomIconButton
-            className={open ? 'show-color-black' : 'show-color-white'}
-            onClick={handleDrawerClose}
-          >
-            {theme.direction === 'rtl' ? (
-              <FaBars color="secondary" />
-            ) : (
-              <div
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-around',
-                  flex: '1',
-                }}
+    <>
+      {userTheme && (
+        <Box sx={{ display: 'flex', position: 'relative' }}>
+          <AppBar open={open}>
+            <Toolbar sx={{ backgroundColor: userTheme['background-color'] }}>
+              <CustomIconButton onClick={handleDrawerOpen} edge="start">
+                {!open && (
+                  <>
+                    <FaBars style={{ color: userTheme['accent-color'] }} />
+                    <span
+                      style={{
+                        marginLeft: '2rem',
+                        color: userTheme['accent-color'],
+                      }}
+                    >
+                      Theme Application
+                    </span>
+                  </>
+                )}
+              </CustomIconButton>
+            </Toolbar>
+          </AppBar>
+          <Drawer variant="permanent" open={open}>
+            <DrawerHeader>
+              <CustomIconButton
+                className={open ? 'show-color-black' : 'show-color-white'}
+                onClick={handleDrawerClose}
               >
-                <CustomSpanMenu>
-                  <span className="text-menu">Theme Application</span>
-                  <FaBars color="secondary" />
-                </CustomSpanMenu>
-              </div>
-            )}
-          </CustomIconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {itemsMenu.map(item => (
-            <Box key={item.text}>
-              {open ? (
-                <ListItemButton component="a" href={item.link}>
-                  <ListItemIcon>{item.icone}</ListItemIcon>
-                  <ListItemText primary={item.text} />
-                </ListItemButton>
-              ) : (
-                <TooltipCustom title={item.text} placement="right">
-                  <ListItemButton component="a" href={item.link}>
-                    <ListItemIcon>{item.icone}</ListItemIcon>
-                    <ListItemText primary={item.text} />
-                  </ListItemButton>
-                </TooltipCustom>
+                {theme.direction === 'rtl' ? (
+                  <FaBars style={{ color: userTheme['accent-color'] }} />
+                ) : (
+                  <div
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-around',
+                      flex: '1',
+                    }}
+                  >
+                    <CustomSpanMenu>
+                      <span
+                        style={{ color: userTheme['accent-color'] }}
+                        className="text-menu"
+                      >
+                        Theme Application
+                      </span>
+                      <FaBars
+                        style={{ color: userTheme['accent-color'] }}
+                        color="secondary"
+                      />
+                    </CustomSpanMenu>
+                  </div>
+                )}
+              </CustomIconButton>
+            </DrawerHeader>
+            <Divider />
+            <List>
+              {itemsMenu({ color: userTheme['accent-color'] }).map(
+                (item: ItensMenuProps) => (
+                  <Box key={item.text}>
+                    {open ? (
+                      <ListItemButton component="a" href={item.link}>
+                        <ListItemIcon
+                          style={{ color: userTheme['accent-color'] }}
+                        >
+                          {item.icone}
+                        </ListItemIcon>
+                        <ListItemText
+                          style={{ color: userTheme['accent-color'] }}
+                          primary={item.text}
+                        />
+                      </ListItemButton>
+                    ) : (
+                      <TooltipCustom title={item.text} placement="right">
+                        <ListItemButton component="a" href={item.link}>
+                          <ListItemIcon>{item.icone}</ListItemIcon>
+                          <ListItemText primary={item.text} />
+                        </ListItemButton>
+                      </TooltipCustom>
+                    )}
+                  </Box>
+                )
               )}
-            </Box>
-          ))}
-        </List>
-      </Drawer>
-      <CustomContainnerChildren>
-        <CustomPaper>
-          <CustomHeaderTitle
-            title={title}
-            showNewButton={showNewButton}
-            textButton={textNewButton}
-          />
-          <CustomContentPage>{children}</CustomContentPage>
-        </CustomPaper>
-      </CustomContainnerChildren>
-    </Box>
+            </List>
+          </Drawer>
+          <CustomContainnerChildren>
+            <CustomPaper>
+              <CustomHeaderTitle
+                title={title}
+                showNewButton={showNewButton}
+                textButton={textNewButton}
+              />
+              <CustomContentPage>{children}</CustomContentPage>
+            </CustomPaper>
+          </CustomContainnerChildren>
+        </Box>
+      )}
+    </>
   );
 };

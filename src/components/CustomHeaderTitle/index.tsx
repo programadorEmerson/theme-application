@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { FaLayerGroup } from 'react-icons/fa';
+import { useThemeContext } from 'hooks/theme-selector';
 
-import { CustomButton } from 'components/CustomButton';
+import CreateNewTheme from 'components/ChooseTheme/Theme/NewTheme';
+
+import { ThemeProps } from 'types/theme_selector.context';
 
 import { CustomHeader } from './style';
 
@@ -16,24 +18,36 @@ type CustomHeaderTitleProps = {
 
 export const CustomHeaderTitle: React.FC<CustomHeaderTitleProps> = ({
   title,
-  routeNew = '',
   textButton = '',
   showNewButton = false,
 }) => {
+  const [userTheme, setUserTheme] = useState<ThemeProps | null>();
+  const { theme_context } = useThemeContext();
+  useEffect(() => {
+    const themeLocalStorage = localStorage.getItem('theme.app.selected');
+    if (themeLocalStorage) {
+      const themeSelected = JSON.parse(themeLocalStorage);
+      setUserTheme(themeSelected);
+    }
+  }, [theme_context]);
   return (
-    <CustomHeader>
-      <span className="title">{title}</span>
-      {showNewButton && (
-        <CustomButton
-          className="right-content"
-          onClick={() => window.location.replace(routeNew)}
-        >
-          <FaLayerGroup />
-          <span style={{ padding: '0.3rem', marginLeft: '1rem' }}>
-            {textButton}
+    <>
+      {userTheme && (
+        <CustomHeader>
+          <span style={{ color: userTheme['accent-color'] }} className="title">
+            {title}
           </span>
-        </CustomButton>
+          {showNewButton && (
+            <CreateNewTheme>
+              <span
+                style={{ padding: '0.3rem', color: userTheme['accent-color'] }}
+              >
+                {textButton}
+              </span>
+            </CreateNewTheme>
+          )}
+        </CustomHeader>
       )}
-    </CustomHeader>
+    </>
   );
 };

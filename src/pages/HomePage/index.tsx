@@ -1,3 +1,4 @@
+import { Themes } from 'components/ChooseTheme';
 import { Layout } from 'components/Layout';
 
 function HomePage() {
@@ -7,7 +8,7 @@ function HomePage() {
       showNewButton={true}
       textNewButton="Novo Tema"
     >
-      <h1>Theme Application</h1>
+      <Themes />
     </Layout>
   );
 }

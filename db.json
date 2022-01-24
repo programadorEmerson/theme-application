@@ -1,0 +1,13 @@
+{
+  "themes": [
+    {
+      "id": 0,
+      "name": "Default Theme",
+      "background-color": "#fdfdfd",
+      "primary-text-color": "#a7a9aa",
+      "secondary-text-color": "#464443",
+      "accent-color": "#5ecbf5",
+      "selected": false
+    }
+  ]
+}
